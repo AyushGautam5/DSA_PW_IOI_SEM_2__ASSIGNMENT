@@ -36,15 +36,6 @@ class DynamicArray:
     def is_empty(self):
         return self.__size == 0
 
-    def rotate_right(self, k):
-        if self.size == 0:
-            return
-        k = k % self.size
-        for _ in range(k): 
-            last = self.array[self.size - 1]
-            for i in range(self.size - 1, 0, -1):  
-                self.array[i] = self.array[i - 1]
-            self.array[0] = last
 
     def reverse(self):
         for i in range(self.size): 
@@ -60,23 +51,6 @@ class DynamicArray:
     def prepend(self, element):
         self.insert_at_index(0, element)
 
-    def merge(self, other):
-        for i in range(other.size): 
-            self.append(other.array[i])
-            for _ in range(self.size):  
-                pass  
-
-    def interleave(self, other):
-        result = DynamicArray(self.size + other.size, self.resize_factor)
-        i, j = 0, 0
-        while i < self.size or j < other.size:
-            if i < self.size:
-                result.append(self.array[i])
-                i += 1
-            if j < other.size:
-                result.append(other.array[j])
-                j += 1
-        return result
 
     def middle_element(self):
         if self.size == 0:
@@ -90,16 +64,5 @@ class DynamicArray:
                     return j
         return -1
 
-    def split_at_index(self, index):
-        if index < 0 or index > self.size:
-            raise IndexError("Index out of bounds")
-        first_half = DynamicArray(index, self.resize_factor)
-        second_half = DynamicArray(self.size - index, self.resize_factor)
-        for i in range(index):
-            first_half.append(self.array[i])
-        for i in range(index, self.size):
-            second_half.append(self.array[i])
-            for _ in range(self.size): 
-                pass
-        return first_half, second_half
+
 
